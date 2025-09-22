@@ -1,0 +1,96 @@
+---
+import PlotFigure from "../components/PlotFigure.astro";
+import Layout from "../layouts/Layout.astro";
+import * as Plot from "@observablehq/plot";
+import penguins from "../assets/penguins.json";
+
+const filteredData = penguins.filter
+
+---
+
+<Layout>
+  <h1 class="text-xl font-bold mb-4 items-center justify-center my-8 ml-45">Penguin avec plusieurs filtres avancés</h1>
+
+
+    <select name="island" id="island" class="mb-4 p-2 border rounded">
+  <option value="">All islands</option>
+  <option value="Biscoe">Biscoe</option>
+  <option value="Dream">Dream</option>
+  <option value="Torgersen">Torgersen</option>
+</select>
+
+   <select name="species" id="species" class="mb-4 p-2 border rounded">
+  <option value="">All species</option>
+  <option value="Adelie">Adelie</option>
+  <option value="Chinstrap">Chinstrap</option>
+  <option value="Gentoo">Gentoo</option>
+</select>
+
+  <div id="myplot" class="flex justify-center items-center"></div>
+
+<script >
+import * as Plot from "@observablehq/plot";
+import penguins from '../assets/penguins.json';
+
+
+ const selectIsland = document.getElementById("island");
+
+ const selectSpecies = document.getElementById("species");
+
+ const div = document.getElementById("myplot");
+
+
+      
+function renderPlot() {
+  const island = selectIsland.value; 
+
+  const species = selectSpecies.value; 
+
+
+//  const filteredData = penguins.filter(p => {
+//         return (!island || p.island === island) &&
+//                (!sex || p.sex === sex);
+//       });
+
+      div.innerHTML = "";
+
+
+
+const chart = Plot.plot({
+  width: 600,
+  height: 400,
+  marks: [
+    Plot.dot(penguins, {
+      x: "culmen_length_mm",
+        y: "culmen_depth_mm",
+      fill: "species",
+      filter: p => {
+        return (!island || p.island === island) &&
+               (!species || p.species === species);
+      }
+    })
+  ],
+  y: { grid: true, label: "Body Mass (g)" },
+  x: { label: "Species / Island" },
+  color: { legend: true } 
+});
+
+
+    div.appendChild(chart);
+
+
+
+
+}
+
+selectIsland.addEventListener("change", renderPlot);
+selectSpecies.addEventListener("change", renderPlot);
+
+
+renderPlot();
+
+
+</script>
+
+
+</Layout>
