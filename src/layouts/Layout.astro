@@ -1,5 +1,13 @@
 ---
 import "../styles/global.css";
+
+//  navigation 
+const pages = [
+  { name: "Simple", href: "/" },
+    { name: "Simple Penguin", href: "/simple_penguin" },
+  { name: "Penguin avec filtre", href: "/penguin_filtre" },
+  { name: "Penguin plusieurs filtres", href: "/penguin_multi_filtre" },
+];
 ---
 
 <!doctype html>
@@ -12,9 +20,27 @@ import "../styles/global.css";
     <title>Astro Basics</title>
   </head>
   <body>
+
+
+
+
+<nav style="padding: 1rem; background: #f0f0f0; display: flex; gap: 1rem;">
+  {pages.map(page => (
+    <a href={page.href} style="text-decoration: none; color: #333; font-weight: bold;">
+      {page.name}
+    </a>
+  ))}
+</nav>
+
+
+
+
+
     <slot />
   </body>
 </html>
+
+
 
 <style>
   html,
