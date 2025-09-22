@@ -6,8 +6,8 @@ import penguins from "../assets/penguins.json";
 ---
 
 <Layout>
-  <h1 class=" text-xl font-bold mb-4 items-center justify-center my-8 ml-45"">Test Astro et Plot (Observablehq)</h1>
-  <PlotFigure
+  <h1 class=" text-xl font-bold mb-4 items-center justify-center my-8 ml-45 ">Test Astro et Plot (Observablehq)</h1>
+  <!-- <PlotFigure
     options={{
       marks: [
         Plot.dot(penguins, {
@@ -17,11 +17,11 @@ import penguins from "../assets/penguins.json";
         }),
       ],
     }}
-  />
+  /> -->
 
 
   <!DOCTYPE html>
-<div id="myplot"></div>
+<div id="myplot" class="flex justify-center items-center my-20"></div>
 <script >
 
 import * as Plot from "@observablehq/plot";
